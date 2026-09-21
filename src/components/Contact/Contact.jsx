@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import emailjs from "@emailjs/browser";
 import LegalModal from "../UI/LegalModal";
 import {
   Phone,
@@ -17,9 +18,9 @@ import {
 import { useInView } from "../../hooks/useInView";
 import "./Contact.css";
 
-// L'envoi passe par un endpoint PHP qui détient la clé Resend côté
-// serveur : aucune clé secrète ne transite par le navigateur.
-const SEND_ENDPOINT = import.meta.env.VITE_SEND_ENDPOINT || "/api/send.php";
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
 // Pas de paramètre `month` : Calendly ouvre sur le mois courant.
 // Le figer afficherait un mois passé dès qu'il est dépassé.
@@ -58,28 +59,40 @@ export default function Contact({ contact }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (honeypot) {
+      setStatus("success");
+      setTimeout(() => setStatus("idle"), 5000);
+      return;
+    }
     setStatus("loading");
     setErrorMsg("");
     try {
-      const res = await fetch(SEND_ENDPOINT, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, website: honeypot }),
-      });
-
-      const payload = await res.json().catch(() => ({}));
-      if (!res.ok || !payload.ok) {
-        throw new Error(payload.error || "");
-      }
-
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          subject: form.subject,
+          stage: form.stage,
+          message: form.message,
+        },
+        EMAILJS_PUBLIC_KEY
+      );
       setStatus("success");
       setForm(EMPTY_FORM);
       setRgpd(false);
       setTimeout(() => setStatus("idle"), 5000);
     } catch (err) {
-      // Le serveur renvoie un message lisible (quota, champ invalide…) :
-      // on l'affiche plutôt qu'un message générique.
-      setErrorMsg(err.message || "");
+      // EmailJS renvoie un statut : on distingue le quota mensuel dépassé
+      // d'une panne réseau, pour que le visiteur sache quoi faire.
+      const code = err?.status;
+      setErrorMsg(
+        code === 426 || code === 429
+          ? "Le service d'envoi est momentanément saturé."
+          : ""
+      );
       setStatus("error");
       setTimeout(() => setStatus("idle"), 8000);
     }
@@ -206,10 +219,8 @@ export default function Contact({ contact }) {
                     <div className="contact__toast contact__toast--error">
                       <AlertCircle size={17} aria-hidden="true" />
                       <span>
-                        {errorMsg ||
-                          "Une erreur est survenue."}{" "}
-                        Vous pouvez aussi m'écrire directement à{" "}
-                        {contact.email}.
+                        {errorMsg || "Une erreur est survenue."} Réessayez, ou
+                        écrivez-moi directement à {contact.email}.
                       </span>
                     </div>
                   )}

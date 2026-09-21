@@ -15,19 +15,9 @@ RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 # RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
 
 # ── SPA : renvoyer index.html pour toutes les routes ──
-# /api/ est exclu : ces scripts PHP doivent s'exécuter, pas être réécrits.
-RewriteCond %{REQUEST_URI} !^/api/
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ /index.html [L]
-
-# ── Protéger la configuration contenant la clé API ──
-<Files "config.php">
-  Require all denied
-</Files>
-<Files "config.example.php">
-  Require all denied
-</Files>
 
 # ══ Compression Gzip ══
 <IfModule mod_deflate.c>

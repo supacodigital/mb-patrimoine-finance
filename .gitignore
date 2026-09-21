@@ -27,6 +27,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
-# Configuration serveur : contient la clé API Resend
-public/api/config.php
