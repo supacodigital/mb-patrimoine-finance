@@ -33,6 +33,11 @@ const SOCIAL_ICONS = {
   Linkedin: Linkedin,
 };
 
+// Sans backend, on ne peut pas limiter par IP. Ce délai bloque au moins
+// les envois répétés depuis un même navigateur (double-clic, spam basique).
+const RESEND_DELAY_MS = 60_000;
+const LAST_SENT_KEY = "mbpf_last_sent";
+
 const EMPTY_FORM = {
   name: "",
   email: "",
@@ -49,6 +54,9 @@ export default function Contact({ contact }) {
   const [rgpd, setRgpd] = useState(false);
   const [status, setStatus] = useState("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  // Vrai quand l'échec vient du délai anti-répétition, pas d'une panne :
+  // le message d'aide doit alors être différent.
+  const [throttled, setThrottled] = useState(false);
   const [privacyModal, setPrivacyModal] = useState(false);
   const [ref, inView] = useInView();
   const formEl = useRef(null);
@@ -59,6 +67,27 @@ export default function Contact({ contact }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Anti-répétition : un envoi par minute depuis ce navigateur.
+    let last = 0;
+    try {
+      last = Number(localStorage.getItem(LAST_SENT_KEY)) || 0;
+    } catch {
+      // Stockage indisponible (navigation privée) : on laisse passer.
+    }
+    const waitMs = RESEND_DELAY_MS - (Date.now() - last);
+    if (waitMs > 0) {
+      setErrorMsg(
+        `Un message vient d'être envoyé. Patientez ${Math.ceil(
+          waitMs / 1000
+        )} secondes avant d'en envoyer un autre.`
+      );
+      setThrottled(true);
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 6000);
+      return;
+    }
+
     if (honeypot) {
       setStatus("success");
       setTimeout(() => setStatus("idle"), 5000);
@@ -66,6 +95,7 @@ export default function Contact({ contact }) {
     }
     setStatus("loading");
     setErrorMsg("");
+    setThrottled(false);
     try {
       await emailjs.send(
         EMAILJS_SERVICE_ID,
@@ -80,6 +110,11 @@ export default function Contact({ contact }) {
         },
         EMAILJS_PUBLIC_KEY
       );
+      try {
+        localStorage.setItem(LAST_SENT_KEY, String(Date.now()));
+      } catch {
+        // Sans stockage, l'anti-répétition ne s'applique pas : sans gravité.
+      }
       setStatus("success");
       setForm(EMPTY_FORM);
       setRgpd(false);
@@ -219,8 +254,14 @@ export default function Contact({ contact }) {
                     <div className="contact__toast contact__toast--error">
                       <AlertCircle size={17} aria-hidden="true" />
                       <span>
-                        {errorMsg || "Une erreur est survenue."} Réessayez, ou
-                        écrivez-moi directement à {contact.email}.
+                        {errorMsg || "Une erreur est survenue."}
+                        {!throttled && (
+                          <>
+                            {" "}
+                            Réessayez, ou écrivez-moi directement à{" "}
+                            {contact.email}.
+                          </>
+                        )}
                       </span>
                     </div>
                   )}
@@ -314,6 +355,7 @@ export default function Contact({ contact }) {
                       name="name"
                       type="text"
                       autoComplete="name"
+                      maxLength={120}
                       placeholder="Jean Dupont"
                       value={form.name}
                       onChange={handleChange}
@@ -330,6 +372,7 @@ export default function Contact({ contact }) {
                       name="email"
                       type="email"
                       autoComplete="email"
+                      maxLength={180}
                       placeholder="jean@exemple.fr"
                       value={form.email}
                       onChange={handleChange}
@@ -349,6 +392,7 @@ export default function Contact({ contact }) {
                     name="phone"
                     type="tel"
                     autoComplete="tel"
+                    maxLength={25}
                     placeholder="06 00 00 00 00"
                     value={form.phone}
                     onChange={handleChange}
