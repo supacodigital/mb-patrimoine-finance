@@ -1,0 +1,215 @@
+.portfolio {
+  padding: var(--section-padding);
+  background: var(--color-bg);
+}
+
+/* ── Steps layout ─────────────────────────────────────── */
+.process__steps {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+  position: relative;
+}
+
+.process-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 10px;
+  position: relative;
+}
+
+/* Connector line between steps */
+.process-step__connector {
+  position: absolute;
+  top: 52px;
+  right: -50%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
+  z-index: 0;
+}
+
+.process-step__number {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--color-accent);
+  margin-bottom: 12px;
+}
+
+.process-step__icon {
+  width: 64px;
+  height: 64px;
+  background: var(--color-primary);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
+  box-shadow: var(--shadow-primary);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+/* Halo pulse continu */
+.process-step__icon::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  opacity: 0.25;
+  animation: icon-pulse 3.5s ease-in-out infinite;
+  z-index: -1;
+}
+
+@keyframes icon-pulse {
+  0%, 100% { transform: scale(1);   opacity: 0.25; }
+  50%       { transform: scale(1.5); opacity: 0; }
+}
+
+/* Rotation de l'icône au hover */
+.process-step:hover .process-step__icon {
+  transform: scale(1.08);
+  box-shadow: var(--shadow-primary-hover);
+}
+
+.process-step:hover .process-step__icon svg {
+  animation: icon-spin 0.9s ease-in-out;
+}
+
+@keyframes icon-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Décalage du pulse pour chaque étape */
+.process-step:nth-child(2) .process-step__icon::before { animation-delay: 0.4s; }
+.process-step:nth-child(3) .process-step__icon::before { animation-delay: 0.8s; }
+.process-step:nth-child(4) .process-step__icon::before { animation-delay: 1.2s; }
+.process-step:nth-child(5) .process-step__icon::before { animation-delay: 1.6s; }
+
+.process-step__content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.process-step__title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+.process-step__description {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+/* ── Tablette : 3 colonnes ────────────────────────────── */
+@media (max-width: 1024px) {
+  .process__steps {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px 16px;
+  }
+
+  .process-step__connector {
+    display: none;
+  }
+
+  /* Désactive les effets sur tablette (pas de hover fiable) */
+  .process-step__icon::before {
+    animation: none;
+    opacity: 0;
+  }
+
+  .process-step:hover .process-step__icon {
+    transform: none;
+    box-shadow: var(--shadow-primary);
+  }
+
+  .process-step:hover .process-step__icon svg {
+    animation: none;
+  }
+}
+
+/* ── Mobile : 1 colonne ───────────────────────────────── */
+@media (max-width: 640px) {
+  .process__steps {
+    grid-template-columns: 1fr;
+    gap: 0;
+    position: relative;
+  }
+
+  /* Trait vertical continu aligné sur le centre des icônes */
+  .process__steps::before {
+    content: "";
+    position: absolute;
+    left: 43px; /* 20px padding card + 48px/2 icône - 1px */
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(
+      to bottom,
+      var(--color-primary) 0%,
+      var(--color-primary-light) 100%
+    );
+    border-radius: 2px;
+    z-index: 0;
+  }
+
+  /* Cards au-dessus du trait */
+  .process-step {
+    position: relative;
+    z-index: 1;
+    flex-direction: row;
+    text-align: left;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px;
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    margin-bottom: 16px;
+  }
+
+  .process-step:last-child {
+    margin-bottom: 0;
+  }
+
+  .process-step__icon {
+    flex-shrink: 0;
+    margin-bottom: 0;
+    width: 48px;
+    height: 48px;
+  }
+
+  .process-step__number {
+    margin-bottom: 4px;
+    font-size: 0.68rem;
+  }
+
+  .process-step__title {
+    font-size: 0.95rem;
+  }
+
+  .process-step__description {
+    font-size: 0.82rem;
+    line-height: 1.6;
+  }
+}
+
+/* Accessibilité : désactive les animations si demandé */
+@media (prefers-reduced-motion: reduce) {
+  .process-step__icon::before {
+    animation: none;
+  }
+  .process-step:hover .process-step__icon svg {
+    animation: none;
+  }
+}

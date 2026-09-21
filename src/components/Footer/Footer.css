@@ -1,0 +1,654 @@
+.footer {
+  background: var(--color-text);
+  color: rgba(255, 255, 255, 0.75);
+  padding: 60px 24px 0;
+  margin: 1rem;
+  border-radius: 3rem;
+}
+
+/* ── Séparateurs ──────────────────────────────────────── */
+.footer__divider {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 0;
+}
+
+/* ── TOP : logo + certifications ─────────────────────── */
+.footer__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  padding-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.footer__brand {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer__logo {
+  height: 100px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+.footer__tagline {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.5;
+  max-width: 260px;
+}
+
+.footer__certs {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 14px;
+}
+
+.footer__certs h3 {
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1.5;
+  text-align: right;
+  max-width: 500px;
+  margin: 0;
+}
+
+.footer__certs-logos {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.footer__certs img {
+  height: 52px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  opacity: 0.85;
+  transition: opacity var(--transition);
+  border-radius: 20px;
+}
+
+.footer__certs img:hover {
+  opacity: 1;
+}
+
+/* Mention du partenariat CIF (Inovea) */
+.footer__partner {
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 1.5;
+  text-align: right;
+  max-width: 500px;
+  margin: 0;
+}
+
+/* ── MIDDLE : 3 colonnes ──────────────────────────────── */
+.footer__middle {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 48px;
+  padding: 40px 0;
+}
+
+.footer__col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer__col:nth-child(1) {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.footer__col:nth-child(2) {
+  align-items: center;
+  text-align: center;
+}
+
+.footer__col:nth-child(3) {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.footer__col-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 6px;
+  color: var(--color-accent, orange);
+}
+
+/* Navigation */
+.footer__nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.footer__nav-link {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  padding: 4px 0;
+  display: inline-block;
+  transition: color var(--transition);
+}
+
+.footer__nav-link:hover {
+  color: var(--color-accent);
+}
+
+.footer__nav-link:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.7);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Contact */
+.footer__contact-item {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+}
+
+/* Social */
+.footer__social {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.footer__social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  padding: 8px 14px;
+  width: fit-content;
+  transition: all var(--transition);
+}
+
+.footer__social-link:hover {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.footer__social-link:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 3px;
+}
+
+/* ── BOTTOM : copyright + légal ──────────────────────── */
+.footer__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.footer__copyright {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.footer__legal {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.footer__legal-link {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.45);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+.footer__legal-link:hover {
+  color: #fff;
+}
+
+.footer__legal-link--agency span {
+  color: var(--color-accent);
+}
+
+.footer__legal-link:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.7);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ── Legal link as button ─────────────────────────────── */
+.footer__legal-link {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* ── Cert button (logo cliquable) ────────────────────── */
+.footer__cert-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  border-radius: 20px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.footer__cert-btn:hover {
+  transform: scale(1.05);
+  opacity: 1;
+}
+
+.footer__cert-btn img {
+  display: block;
+}
+
+.footer__certs-hint {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.35);
+  text-align: right;
+  margin: 0;
+}
+
+/* ── Modale PDF ───────────────────────────────────────── */
+.pdf-modal__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  animation: modal-fade-in 0.2s ease;
+}
+
+.pdf-modal__card {
+  background: #fff;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 820px;
+  height: 88vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 8px 48px rgba(0, 0, 0, 0.25);
+  animation: modal-slide-up 0.25s ease;
+}
+
+.pdf-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 20px;
+  border-bottom: 1px solid #e8e0d5;
+  flex-shrink: 0;
+}
+
+.pdf-modal__header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.pdf-modal__title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0e3f3a;
+}
+
+.pdf-modal__tabs {
+  display: flex;
+  gap: 6px;
+}
+
+.pdf-modal__tab {
+  padding: 4px 12px;
+  border-radius: 100px;
+  border: 1px solid #e8e0d5;
+  background: none;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #888;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s ease;
+}
+
+.pdf-modal__tab:hover {
+  border-color: #0e3f3a;
+  color: #0e3f3a;
+}
+
+.pdf-modal__tab--active {
+  background: #0e3f3a;
+  border-color: #0e3f3a;
+  color: #fff;
+}
+
+.pdf-modal__close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  color: #888;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s;
+}
+
+.pdf-modal__close:hover {
+  background: #f0ebe4;
+  color: #0e3f3a;
+}
+
+.pdf-modal__iframe {
+  flex: 1;
+  width: 100%;
+  border: none;
+}
+
+/* ── Modal overlay ────────────────────────────────────── */
+.legal-modal__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  animation: modal-fade-in 0.2s ease;
+}
+
+@keyframes modal-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.legal-modal__card {
+  background: #fff;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 680px;
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 48px rgba(0, 0, 0, 0.18);
+  animation: modal-slide-up 0.25s ease;
+}
+
+@keyframes modal-slide-up {
+  from {
+    transform: translateY(24px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.legal-modal__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 28px 32px 20px;
+  border-bottom: 1px solid #e8e0d5;
+  flex-shrink: 0;
+}
+
+.legal-modal__title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0e3f3a;
+  margin: 0 0 4px;
+}
+
+.legal-modal__date {
+  font-size: 0.78rem;
+  color: #999;
+  margin: 0;
+}
+
+.legal-modal__close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  color: #888;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s;
+}
+
+.legal-modal__close:hover {
+  background: #f0ebe4;
+  color: #0e3f3a;
+}
+
+.legal-modal__body {
+  padding: 24px 32px 32px;
+  overflow-y: auto;
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: #3d4f4c;
+}
+
+.legal-modal__body h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0e3f3a;
+  margin: 24px 0 8px;
+}
+
+.legal-modal__body h3:first-child {
+  margin-top: 0;
+}
+
+.legal-modal__body p {
+  margin-bottom: 10px;
+}
+
+.legal-modal__body ul {
+  padding-left: 20px;
+  margin-bottom: 10px;
+}
+
+.legal-modal__body li {
+  margin-bottom: 4px;
+}
+
+.legal-modal__body a {
+  color: #0e3f3a;
+}
+
+.legal-modal__body hr {
+  border: none;
+  border-top: 1px solid #e8e0d5;
+  margin: 24px 0 16px;
+}
+
+.legal-modal__note {
+  font-size: 0.8rem;
+  color: #999;
+}
+
+@media (max-width: 640px) {
+  .legal-modal__card {
+    max-height: 92vh;
+    border-radius: 12px;
+  }
+
+  .legal-modal__header {
+    padding: 20px 20px 16px;
+  }
+
+  .legal-modal__body {
+    padding: 16px 20px 24px;
+  }
+}
+
+/* ── Responsive ───────────────────────────────────────── */
+@media (max-width: 900px) {
+  .footer__middle {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  /* Navigation occupe toute la largeur */
+  .footer__col:nth-child(1) {
+    grid-column: 1 / -1;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  /* Contact et Suivre côte à côte */
+  .footer__col:nth-child(2),
+  .footer__col:nth-child(3) {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  /* Nav en ligne sur tablette */
+  .footer__nav-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px 16px;
+  }
+
+  .footer__certs img {
+    height: 44px;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer {
+    padding: 40px 16px 0;
+    margin: 0.5rem;
+    border-radius: 2rem;
+  }
+
+  /* TOP */
+  .footer__top {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding-bottom: 28px;
+    text-align: center;
+  }
+
+  .footer__logo {
+    height: 70px;
+  }
+
+  .footer__tagline {
+    font-size: 0.82rem;
+  }
+
+  .footer__certs {
+    align-items: center;
+    gap: 10px;
+  }
+
+  .footer__certs h3 {
+    text-align: center;
+    font-size: 0.65rem;
+  }
+
+  .footer__partner {
+    text-align: center;
+    font-size: 0.65rem;
+  }
+
+  .footer__certs-logos {
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .footer__certs img {
+    height: 36px;
+  }
+
+  /* MIDDLE : tout en colonne, tout aligné à gauche */
+  .footer__middle {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 28px 0;
+  }
+
+  .footer__col:nth-child(1),
+  .footer__col:nth-child(2),
+  .footer__col:nth-child(3) {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .footer__nav-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+  }
+
+  .footer__social-link {
+    padding: 6px 12px;
+    font-size: 0.82rem;
+  }
+
+  /* BOTTOM */
+  .footer__bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 16px 0;
+  }
+
+  .footer__legal {
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .footer__copyright,
+  .footer__legal-link {
+    font-size: 0.75rem;
+  }
+}

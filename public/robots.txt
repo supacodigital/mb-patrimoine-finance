@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Page légale indexable
+Allow: /politique-de-confidentialite.html
+
+# Fichiers non pertinents pour la recherche
+Disallow: /orias.pdf
+Disallow: /partenaires/
+Disallow: /partenaires2/
+
+Sitemap: https://mb-patrimoine-finance.fr/sitemap.xml

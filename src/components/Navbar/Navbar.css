@@ -1,0 +1,371 @@
+/* ============================================================
+   NAVBAR
+   ============================================================ */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-navbar);
+  background: rgba(243, 233, 221, 0.92);
+  border-bottom: 1px solid transparent;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: background var(--transition), border-color var(--transition), box-shadow var(--transition);
+  animation: navbar-enter 0.5s ease both;
+}
+
+@keyframes navbar-enter {
+  from { opacity: 0; transform: translateY(-100%); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.navbar--scrolled {
+  background: rgba(243, 233, 221, 0.97);
+  border-bottom-color: var(--color-border);
+  box-shadow: var(--shadow);
+}
+
+/* ── Barre de progression ─────────────────────────────── */
+.navbar__progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: var(--color-accent);
+  border-radius: 0 2px 2px 0;
+  transition: width 0.1s linear;
+}
+
+/* ── Layout ───────────────────────────────────────────── */
+.navbar__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  height: 76px;
+}
+
+/* ── Logo ─────────────────────────────────────────────── */
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.navbar__logo img {
+  height: 52px;
+  width: auto;
+  display: block;
+}
+
+/* ── Nav desktop ──────────────────────────────────────── */
+.navbar__nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ── Liens ────────────────────────────────────────────── */
+.navbar__link {
+  position: relative;
+  padding: 8px 12px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text);
+  text-decoration: none;
+  white-space: nowrap;
+  border-radius: var(--radius);
+  transition: color var(--transition);
+}
+
+/* Soulignement animé */
+.navbar__link::after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: 12px;
+  right: 12px;
+  height: 2px;
+  background: var(--color-accent);
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.25s ease;
+}
+
+.navbar__link:hover {
+  color: var(--color-accent);
+}
+
+.navbar__link:hover::after {
+  transform: scaleX(1);
+}
+
+.navbar__link--active {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.navbar__link--active::after {
+  transform: scaleX(1);
+}
+
+/* Bouton "Nous rejoindre" — même rendu qu'un lien */
+.navbar__link--joinus {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* ── CTA ──────────────────────────────────────────────── */
+.navbar__cta {
+  margin-left: 8px;
+  padding: 10px 18px;
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+
+/* ── Burger : deux lignes, sans cadre ─────────────────── */
+.navbar__burger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  color: var(--color-text);
+  transition: color var(--transition), transform 160ms ease-out;
+}
+
+.navbar__burger:active {
+  transform: scale(0.94);
+}
+
+.navbar__burger-lines {
+  position: relative;
+  display: block;
+  width: 24px;
+  height: 12px;
+}
+
+.navbar__burger-line {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: currentColor;
+  border-radius: 2px;
+  transition: transform 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.navbar__burger-line:nth-child(1) {
+  top: 0;
+}
+
+.navbar__burger-line:nth-child(2) {
+  bottom: 0;
+}
+
+/* Ouvert : les deux lignes se croisent au centre */
+.navbar__burger[aria-expanded="true"] .navbar__burger-line:nth-child(1) {
+  transform: translateY(5px) rotate(45deg);
+}
+
+.navbar__burger[aria-expanded="true"] .navbar__burger-line:nth-child(2) {
+  transform: translateY(-5px) rotate(-45deg);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .navbar__burger:hover {
+    color: var(--color-primary);
+  }
+}
+
+/* ============================================================
+   RESPONSIVE — tablette
+   ============================================================ */
+
+/* Resserrement léger juste avant le passage au burger */
+@media (max-width: 1100px) {
+  .navbar__link {
+    padding: 8px 9px;
+    font-size: 0.82rem;
+  }
+
+  .navbar__cta {
+    padding: 10px 14px;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE — mobile
+   ============================================================ */
+
+@media (max-width: 1000px) {
+
+  /* Burger visible, au-dessus du panneau plein écran */
+  .navbar__burger {
+    display: flex;
+    position: relative;
+    z-index: 2;
+  }
+
+  .navbar__logo {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Menu plein écran : caché par défaut.
+     Le header porte backdrop-filter + transform, qui créent un containing
+     block : un enfant en `fixed` se calerait sur le header, pas sur le
+     viewport. On ancre donc le panneau en `absolute` sur le header lui-même
+     (déjà fixed, en haut de page) et on lui donne la hauteur de l'écran. */
+  .navbar__nav {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    gap: 4px;
+    /* Dégage la barre du header, dont le burger reste cliquable au-dessus */
+    padding: calc(76px + 24px) 24px calc(24px + env(safe-area-inset-bottom));
+    background: var(--color-bg);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .navbar__nav--open {
+    display: flex;
+    animation: mobile-menu-in 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  @keyframes mobile-menu-in {
+    from { opacity: 0; transform: scale(0.98); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  /* Liens en pleine largeur, respirants */
+  .navbar__link {
+    display: flex;
+    align-items: center;
+    min-height: 56px;
+    padding: 14px 4px;
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    color: var(--color-text);
+    border-radius: 0;
+    border-bottom: 1px solid var(--color-border);
+    transition: color var(--transition), transform 160ms ease-out;
+  }
+
+  .navbar__link:active {
+    transform: scale(0.98);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .navbar__link:hover {
+      background: none;
+      color: var(--color-accent);
+    }
+  }
+
+  /* Pas de soulignement sur mobile */
+  .navbar__link::after {
+    display: none;
+  }
+
+  .navbar__link--active {
+    color: var(--color-accent);
+    background: none;
+  }
+
+  /* Entrée échelonnée des liens */
+  .navbar__nav--open > * {
+    animation: menu-item-in 0.3s cubic-bezier(0.23, 1, 0.32, 1) both;
+  }
+
+  .navbar__nav--open > *:nth-child(1) { animation-delay: 0.04s; }
+  .navbar__nav--open > *:nth-child(2) { animation-delay: 0.08s; }
+  .navbar__nav--open > *:nth-child(3) { animation-delay: 0.12s; }
+  .navbar__nav--open > *:nth-child(4) { animation-delay: 0.16s; }
+  .navbar__nav--open > *:nth-child(5) { animation-delay: 0.20s; }
+  .navbar__nav--open > *:nth-child(6) { animation-delay: 0.24s; }
+  .navbar__nav--open > *:nth-child(7) { animation-delay: 0.28s; }
+
+  @keyframes menu-item-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* CTA en bas, pleine largeur */
+  .navbar__cta {
+    margin-left: 0;
+    margin-top: 28px;
+    min-height: 54px;
+    padding: 16px 24px;
+    justify-content: center;
+    width: 100%;
+    font-size: 1rem;
+    border-radius: var(--radius);
+  }
+}
+
+/* ── Mouvement réduit ─────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .navbar {
+    animation: none;
+  }
+
+  .navbar__nav--open,
+  .navbar__nav--open > * {
+    animation: none;
+  }
+
+  .navbar__burger-line,
+  .navbar__link {
+    transition: none;
+  }
+}
+
+/* ── Écran bas (paysage mobile) ──────────────────────────
+   7 entrées + CTA ne tiennent pas sous 520px de haut sans passer les
+   cibles sous 40px : on resserre au maximum raisonnable et on assume
+   un léger scroll, plutôt que de sacrifier l'ergonomie tactile. */
+@media (max-width: 1000px) and (max-height: 520px) {
+  .navbar__nav {
+    justify-content: flex-start;
+    padding-top: calc(76px + 12px);
+  }
+
+  .navbar__nav {
+    gap: 0;
+  }
+
+  .navbar__link {
+    min-height: 40px;
+    padding: 4px;
+    font-size: 1.1rem;
+  }
+
+  .navbar__cta {
+    margin-top: 12px;
+    min-height: 44px;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+}

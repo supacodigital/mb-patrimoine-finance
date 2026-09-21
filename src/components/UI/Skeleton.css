@@ -1,0 +1,98 @@
+/* ── Skeleton shimmer ─────────────────────────────────── */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-border) 25%,
+    #eef2f7 50%,
+    var(--color-border) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite;
+  display: block;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.skeleton--mb    { margin-bottom: 20px; }
+.skeleton--mb-sm { margin-bottom: 12px; }
+.skeleton--mb-xs { margin-bottom: 8px; }
+
+/* ── Service card skeleton ────────────────────────────── */
+.skeleton-service-card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+}
+
+/* ── Portfolio card skeleton ──────────────────────────── */
+.skeleton-portfolio-card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-bg);
+}
+
+.skeleton-portfolio-card__content {
+  padding: 20px 24px;
+}
+
+/* ── Testimonial card skeleton ────────────────────────── */
+.skeleton-testimonial-card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+}
+
+.skeleton-testimonial-card__author {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-border);
+}
+
+.skeleton-testimonial-card__author-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* ── Page loader ──────────────────────────────────────── */
+.page-loader {
+  position: fixed;
+  inset: 0;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-loader);
+  animation: loader-fade-out 0.4s ease 1.2s forwards;
+}
+
+@keyframes loader-fade-out {
+  to { opacity: 0; pointer-events: none; }
+}
+
+.page-loader__spinner {
+  position: relative;
+  width: 48px;
+  height: 48px;
+}
+
+.page-loader__ring {
+  position: absolute;
+  inset: 0;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

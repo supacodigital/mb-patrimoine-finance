@@ -1,0 +1,460 @@
+.offers {
+  padding: var(--section-padding);
+  background: var(--color-bg);
+}
+
+/* ============================================================
+   BANDE « VOUS VOULEZ : » — entrée par le besoin
+   ============================================================ */
+.offers__needs {
+  margin-bottom: 64px;
+}
+
+.offers__needs-label {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  letter-spacing: 0.02em;
+  color: var(--color-text);
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.offers__needs-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.offers__need {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 16px 18px;
+  background: var(--color-primary);
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius);
+  color: #fff;
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.35;
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition),
+    transform var(--transition), box-shadow var(--transition);
+}
+
+.offers__need svg {
+  flex-shrink: 0;
+  opacity: 0.7;
+  transition: transform var(--transition), opacity var(--transition);
+}
+
+.offers__need:hover {
+  background: var(--color-primary-hover);
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-primary);
+}
+
+.offers__need:hover svg {
+  opacity: 1;
+  transform: translateX(3px);
+}
+
+/* ============================================================
+   GRILLE UNIQUE — les 5 offres coulent en 3 colonnes
+   ============================================================ */
+.offers__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+/* Indicateurs du slider : masqués hors mobile */
+.offers__dots {
+  display: none;
+}
+
+/* La carte patrimoniale occupe les 2 colonnes restantes de sa rangée */
+.offer-card--wide {
+  grid-column: span 2;
+}
+
+/* ============================================================
+   CARTE D'OFFRE
+   ============================================================ */
+.offer-card {
+  display: flex;
+  flex-direction: column;
+  padding: 28px;
+  background: var(--color-bg-alt);
+  border-radius: var(--radius-lg);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.offer-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Offre mise en avant (stratégie patrimoniale Inovea) */
+.offer-card--featured {
+  background: var(--color-primary);
+}
+
+/* Étiquette de gamme : remplace l'ancien en-tête de bloc */
+.offer-card__range {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  align-self: flex-start;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--range-color, var(--color-primary));
+  margin-bottom: 16px;
+}
+
+.offer-card__range-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius);
+  background: var(--range-color, var(--color-primary));
+  color: #fff;
+}
+
+.offer-card--featured .offer-card__range {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.offer-card--featured .offer-card__range-icon {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.offer-card__partner {
+  align-self: flex-start;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  margin-bottom: 14px;
+}
+
+.offer-card__baseline {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--range-color, var(--color-primary));
+  margin-bottom: 8px;
+}
+
+.offer-card--featured .offer-card__baseline {
+  color: var(--color-accent);
+}
+
+.offer-card__title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.25;
+  margin-bottom: 12px;
+}
+
+.offer-card--featured .offer-card__title {
+  color: #fff;
+}
+
+.offer-card__format {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--range-color, var(--color-primary));
+  padding-bottom: 16px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.offer-card__format svg {
+  flex-shrink: 0;
+  opacity: 0.75;
+}
+
+.offer-card--featured .offer-card__format {
+  color: var(--color-accent);
+  border-bottom-color: rgba(255, 255, 255, 0.2);
+}
+
+.offer-card__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.offer-card__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--color-text);
+}
+
+.offer-card--featured .offer-card__item {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.offer-card__check {
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: var(--range-color, var(--color-primary));
+}
+
+.offer-card--featured .offer-card__check {
+  color: var(--color-accent);
+}
+
+/* Public visé — poussé en bas de carte, au-dessus du CTA */
+.offer-card__meta {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Marge seulement si le bloc porte réellement du contenu :
+   sinon les CTA se désalignent entre deux cartes d'une même gamme. */
+.offer-card__meta:not(:empty) {
+  padding-top: 4px;
+  margin-bottom: 20px;
+}
+
+.offer-card__meta-line {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.825rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+.offer-card--featured .offer-card__meta-line {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.offer-card__meta-line svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* CTA plein et sans contour : cohérent avec les cartes sans bordure */
+.offer-card__cta {
+  justify-content: center;
+  width: 100%;
+  font-size: 0.9rem;
+  background: var(--color-primary-light);
+  border-color: transparent;
+  color: var(--color-primary);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .offer-card__cta:hover {
+    background: var(--color-primary);
+    border-color: transparent;
+    color: #fff;
+    transform: none;
+  }
+}
+
+.offer-card__cta:active {
+  transform: scale(0.98);
+}
+
+/* CTA de la carte mise en avant : inversé sur fond sombre */
+.offer-card--featured .offer-card__cta {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+}
+
+.offer-card--featured .offer-card__cta:hover {
+  background: #fff;
+  border-color: #fff;
+  color: var(--color-primary);
+  box-shadow: none;
+}
+
+.offer-card--featured .offer-card__cta:focus-visible {
+  outline-color: #fff;
+}
+
+.offer-card__legal {
+  margin-top: 14px;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Mention du tarif : une seule fois, en fin de section */
+.offers__pricing-note {
+  margin-top: 48px;
+  padding-top: 28px;
+  border-top: 1px solid var(--color-border);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+/* ============================================================
+   TABLETTE
+   ============================================================ */
+@media (max-width: 900px) {
+  .offers__needs-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* 2 colonnes : la carte large reprend sa place naturelle */
+  .offers__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .offer-card--wide {
+    grid-column: span 2;
+  }
+
+  .offers__need:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: var(--color-primary);
+  }
+
+  /* Pas d'effet de survol sur tactile */
+  .offer-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+@media (max-width: 640px) {
+  /* ── Slider : les cartes défilent horizontalement ──────
+     La grille devient une piste scrollable avec accroche
+     par carte. Le débordement négatif fait sortir la piste
+     du conteneur pour que les cartes touchent les bords. */
+  .offers__grid {
+    display: flex;
+    grid-template-columns: none;
+    gap: 14px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin: 0 -16px;
+    padding: 4px 16px 8px;
+  }
+
+  .offers__grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .offers__grid > .offer-card {
+    flex: 0 0 86%;
+    scroll-snap-align: center;
+  }
+
+  /* Dernière carte : marge de fin pour qu'elle se centre aussi */
+  .offers__grid > .offer-card:last-child {
+    margin-right: 0;
+  }
+
+  .offer-card--wide {
+    grid-column: auto;
+  }
+
+  /* Indicateurs de position sous le slider */
+  .offers__dots {
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+    margin-top: 18px;
+  }
+
+  .offers__dot {
+    width: 7px;
+    height: 7px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: var(--color-border);
+    cursor: pointer;
+    transition: background var(--transition), width var(--transition);
+  }
+
+  .offers__dot--active {
+    width: 22px;
+    border-radius: var(--radius-pill);
+    background: var(--color-primary);
+  }
+
+  .offers__needs {
+    margin-bottom: 44px;
+  }
+
+  .offers__needs-label {
+    font-size: 1.25rem;
+    margin-bottom: 18px;
+  }
+
+  .offers__needs-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .offers__need {
+    padding: 14px 16px;
+    font-size: 0.88rem;
+  }
+
+  .offer-card {
+    padding: 22px 20px;
+  }
+
+  .offer-card__title {
+    font-size: 1.1rem;
+  }
+
+  .offer-card__format {
+    font-size: 0.9rem;
+    padding-bottom: 14px;
+    margin-bottom: 14px;
+  }
+
+  .offers__pricing-note {
+    margin-top: 36px;
+    padding-top: 22px;
+    font-size: 0.85rem;
+  }
+
+  .offer-card__item {
+    font-size: 0.86rem;
+  }
+}

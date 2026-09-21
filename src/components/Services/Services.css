@@ -1,0 +1,525 @@
+/* ============================================================
+   SERVICES — Carousel cards paysage
+   ============================================================ */
+
+.services {
+  padding: var(--section-padding);
+  background: var(--color-bg-alt);
+}
+
+/* ── Intro ────────────────────────────────────────────── */
+.services__intro {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 680px;
+  margin-bottom: 52px;
+}
+
+.services__intro-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-accent);
+}
+
+.services__intro-title {
+  font-size: clamp(1.6rem, 3.5vw, 2.25rem);
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.services__intro-text {
+  font-size: 1.05rem;
+  color: var(--color-text-muted);
+  line-height: 1.8;
+}
+
+/* ── Nav titres (desktop) ─────────────────────────────── */
+.svc-nav {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.svc-nav__item {
+  padding: 8px 18px;
+  border-radius: 100px;
+  border: 1px solid var(--color-border, #e8e0d5);
+  background: transparent;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+.svc-nav__item:hover {
+  border-color: var(--nav-color);
+  color: var(--nav-color);
+  background: color-mix(in srgb, var(--nav-color) 6%, transparent);
+}
+
+.svc-nav__item--active {
+  background: var(--nav-color);
+  border-color: var(--nav-color);
+  color: #fff;
+}
+
+@media (max-width: 640px) {
+  .svc-nav {
+    display: none;
+  }
+}
+
+/* ============================================================
+   CAROUSEL
+   ============================================================ */
+
+.svc-carousel {
+  position: relative;
+}
+
+.svc-carousel__track {
+  position: relative;
+  height: 360px;
+}
+
+.svc-carousel__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.svc-carousel__slide--active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ── Contrôles ────────────────────────────────────────── */
+.svc-carousel__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.svc-carousel__arrow {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border, #e8e0d5);
+  background: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text);
+  transition: background 0.2s ease, border-color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.svc-carousel__arrow:hover {
+  background: var(--color-primary-light, #f0ebe5);
+  border-color: var(--color-accent);
+}
+
+.svc-carousel__dots {
+  display: flex;
+  gap: 8px;
+}
+
+.svc-carousel__dot {
+  position: relative;
+  width: 32px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--color-border, #e8e0d5);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  overflow: hidden;
+  transition: background 0.2s ease;
+}
+
+.svc-carousel__dot--active {
+  background: color-mix(in srgb, var(--color-accent) 30%, transparent);
+}
+
+/* Barre de progression animée */
+.svc-carousel__dot-progress {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--color-accent);
+  border-radius: 2px;
+}
+
+.svc-carousel__dot--active .svc-carousel__dot-progress {
+  animation: dot-fill var(--delay, 5000ms) linear forwards;
+}
+
+@keyframes dot-fill {
+  from {
+    left: -100%;
+  }
+  to {
+    left: 0%;
+  }
+}
+
+/* ============================================================
+   CARD PAYSAGE
+   ============================================================ */
+
+.svc-card {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  height: 360px;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.08);
+}
+
+/* ── Image gauche ─────────────────────────────────────── */
+.svc-card__img {
+  position: relative;
+  overflow: hidden;
+}
+
+.svc-card__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.svc-card--active .svc-card__img img {
+  transform: scale(1.04);
+}
+
+.svc-card__img-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    transparent 50%,
+    rgba(255, 255, 255, 0.08) 100%
+  );
+}
+
+.svc-card__num {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.08em;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 3px 8px;
+  border-radius: 100px;
+}
+
+/* ── Corps droite ─────────────────────────────────────── */
+.svc-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 32px 36px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.svc-card__header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.svc-card__icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--card-color) 12%, transparent);
+  color: var(--card-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.svc-card__title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--color-text);
+  line-height: 1.2;
+  margin: 0;
+}
+
+/* ── Colonnes thèmes / questions ──────────────────────── */
+.svc-card__cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  flex: 1;
+  min-height: 0;
+}
+
+.svc-card__col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 0;
+}
+
+.svc-card__col-label {
+  font-size: 0.62rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--card-color);
+  margin: 0;
+  flex-shrink: 0;
+}
+
+/* Tags */
+.svc-card__tags {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.svc-card__tag {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  padding: 0;
+  background: none;
+  border: none;
+}
+
+/* Questions */
+.svc-card__questions {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+}
+
+.svc-card__questions li {
+  display: flex;
+  gap: 4px;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.svc-card__quote {
+  font-size: 1rem;
+  line-height: 1;
+  color: var(--card-color);
+  font-style: normal;
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+/* CTA */
+.svc-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 20px;
+  background: var(--card-color);
+  color: #fff;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  width: fit-content;
+  flex-shrink: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.svc-card__cta:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+/* Tablette */
+@media (max-width: 1024px) {
+  .svc-card {
+    grid-template-columns: 260px 1fr;
+  }
+
+  .svc-card__body {
+    padding: 24px 28px;
+    gap: 16px;
+  }
+
+  .svc-card__title {
+    font-size: 1.2rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .svc-carousel__track {
+    height: auto;
+  }
+
+  .svc-carousel__slide {
+    position: relative;
+    inset: auto;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+  }
+
+  .svc-carousel__slide--active {
+    opacity: 1;
+    height: auto;
+    overflow: visible;
+    pointer-events: auto;
+  }
+
+  .svc-card {
+    grid-template-columns: 1fr;
+    grid-template-rows: 200px auto;
+    height: auto;
+    border-radius: 18px;
+  }
+
+  .svc-card__body {
+    padding: 20px;
+    gap: 14px;
+  }
+
+  .svc-card__cols {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .svc-card__title {
+    font-size: 1.1rem;
+  }
+
+  .svc-carousel__dot {
+    width: 24px;
+  }
+}
+
+/* Réduction de mouvement */
+@media (prefers-reduced-motion: reduce) {
+  .svc-carousel__slide,
+  .svc-card__img img,
+  .svc-carousel__dot-progress {
+    transition: none;
+    animation: none;
+  }
+}
+
+/* ============================================================
+   BANDEAU PARTENAIRES
+   ============================================================ */
+
+.partners-banner {
+  overflow: hidden;
+  padding: 40px 0 48px;
+  background: var(--color-bg-alt);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+@keyframes partners-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-25%);
+  }
+}
+
+.partners-banner__track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: partners-scroll 45s linear infinite;
+}
+
+.partners-banner__item {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 52px;
+  padding: 0 40px;
+}
+
+.partners-banner__item img {
+  height: 100%;
+  width: auto;
+  max-width: 140px;
+  object-fit: contain;
+}
+
+.partners-banner__label {
+  text-align: center;
+  margin: 16px 0 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-text-muted);
+  margin-bottom: 1.5rem;
+}
+
+@keyframes partners-scroll-reverse {
+  from {
+    transform: translateX(-25%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.partners-banner--reverse {
+  border-top: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 0;
+}
+
+.partners-banner__track--reverse {
+  animation: partners-scroll-reverse 45s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .partners-banner__track,
+  .partners-banner__track--reverse {
+    animation: none;
+  }
+}

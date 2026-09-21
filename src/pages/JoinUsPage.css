@@ -1,0 +1,26 @@
+.joinus-page {
+  min-height: 100vh;
+}
+
+.joinus-page__topbar {
+  padding-top: 24px;
+  padding-bottom: 8px;
+}
+
+.joinus-page__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  padding: 8px 0;
+  transition: color 0.2s;
+}
+
+.joinus-page__back:hover {
+  color: var(--color-text);
+}

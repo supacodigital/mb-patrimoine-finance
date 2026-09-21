@@ -1,0 +1,253 @@
+/* ============================================================
+   ABOUT
+   ============================================================ */
+
+.about {
+  padding: var(--section-padding);
+  background: #f9f9f9;
+  position: relative;
+}
+
+/* ── Vague de transition vers Offers (#f3e9dd = --color-bg) ── */
+.about::after {
+  content: "";
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath d='M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z' fill='%23f3e9dd'/%3E%3C/svg%3E")
+    no-repeat bottom center / 100% 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Layout : texte gauche / aside droite ─────────────── */
+.about__layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  align-items: start;
+}
+
+/* ── Texte ────────────────────────────────────────────── */
+.about__text {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.about__section-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-accent);
+}
+
+.about__title {
+  font-size: clamp(1.6rem, 3.5vw, 2.25rem);
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.2;
+}
+
+.about__interventions-label {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.about__description {
+  font-size: 1.05rem;
+  color: var(--color-text-muted);
+  line-height: 1.8;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 500px;
+}
+
+.about__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-left: 4px;
+}
+
+.about__list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.about__list li::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  flex-shrink: 0;
+}
+
+/* ── Mots mis en valeur dans les paragraphes ──────────── */
+.about__mark--strong,
+.about__mark--accent {
+  background: none;
+  font-style: normal;
+}
+
+.about__mark--strong {
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.about__mark--accent {
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+/* ── Badges chiffres ──────────────────────────────────── */
+.about__badge-row {
+  display: flex;
+  justify-content: space-around;
+  gap: 16px;
+  padding: 20px 0 0;
+  border-top: 1px solid var(--color-border, #e8e0d5);
+  flex-wrap: wrap;
+}
+
+.about__badge {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.about__badge-number {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.about__badge-suffix {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  margin-left: 1px;
+}
+
+.about__badge-label {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+/* ── Aside : photo + objectifs ────────────────────────── */
+.about__aside {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  position: sticky;
+  top: 100px;
+}
+
+/* ── Photo ────────────────────────────────────────────── */
+.about__photo {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+}
+
+.about__photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.about__photo:hover .about__photo-img {
+  transform: scale(1.03);
+}
+
+/* ── Responsive tablette ──────────────────────────────── */
+@media (max-width: 1023px) {
+  .about__layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .about__text {
+    order: 0;
+  }
+
+  .about__aside {
+    order: 1;
+    position: static;
+    gap: 20px;
+  }
+
+  .about__photo {
+    aspect-ratio: 3 / 2;
+  }
+
+  .about__title {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+  }
+
+  .about__description {
+    font-size: 1rem;
+    gap: 10px;
+  }
+
+  .about__badge-row {
+    padding: 16px 0 0;
+  }
+}
+
+/* ── Responsive mobile ────────────────────────────────── */
+@media (max-width: 640px) {
+  .about__layout {
+    gap: 28px;
+  }
+
+  .about__text {
+    gap: 16px;
+  }
+
+  .about__description {
+    font-size: 0.95rem;
+    gap: 8px;
+  }
+
+  /* Photo format carré sur mobile */
+  .about__photo {
+    aspect-ratio: 1 / 1;
+    border-radius: var(--radius);
+  }
+
+  .about__badge-row {
+    padding: 12px 0 0;
+  }
+
+  .about__badge {
+    align-items: center;
+    text-align: center;
+  }
+
+  .about__badge-number {
+    font-size: 1.75rem;
+  }
+
+  .about__badge-suffix {
+    font-size: 1.2rem;
+  }
+
+  .about__badge-label {
+    font-size: 0.72rem;
+  }
+}
